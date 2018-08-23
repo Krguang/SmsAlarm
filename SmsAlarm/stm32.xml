@@ -45,7 +45,7 @@
     <AllDependencies>
       <ProjectDependency>
         <RelativePath>..\SmsAlarm.gpdsc</RelativePath>
-        <Timestamp>131794611535225379</Timestamp>
+        <Timestamp>131794632317371472</Timestamp>
       </ProjectDependency>
     </AllDependencies>
     <RootDirectory>
@@ -252,11 +252,11 @@
       <ImportedConfiguration>
         <Settings>
           <IncludeDirectories>
-            <string>C:\Users\K\Desktop\Stm32VS\SmsAlarm\Inc</string>
-            <string>C:\Users\K\Desktop\Stm32VS\SmsAlarm\Drivers\CMSIS\Device\ST\STM32F1xx\Include</string>
-            <string>C:\Users\K\Desktop\Stm32VS\SmsAlarm\Drivers\STM32F1xx_HAL_Driver\Inc</string>
-            <string>C:\Users\K\Desktop\Stm32VS\SmsAlarm\Drivers\STM32F1xx_HAL_Driver\Inc\Legacy</string>
-            <string>C:\Users\K\Desktop\Stm32VS\SmsAlarm\Drivers\STM32F1xx_HAL_Driver\Src</string>
+            <string>C:\Users\K\Desktop\Stm32VS\SmsAlarm\SmsAlarm\..\Inc</string>
+            <string>C:\Users\K\Desktop\Stm32VS\SmsAlarm\SmsAlarm\..\Drivers\CMSIS\Device\ST\STM32F1xx\Include</string>
+            <string>C:\Users\K\Desktop\Stm32VS\SmsAlarm\SmsAlarm\..\Drivers\STM32F1xx_HAL_Driver\Inc</string>
+            <string>C:\Users\K\Desktop\Stm32VS\SmsAlarm\SmsAlarm\..\Drivers\STM32F1xx_HAL_Driver\Inc\Legacy</string>
+            <string>C:\Users\K\Desktop\Stm32VS\SmsAlarm\SmsAlarm\..\Drivers\STM32F1xx_HAL_Driver\Src</string>
           </IncludeDirectories>
           <PreprocessorMacros>
             <string>$$com.sysprogs.bspoptions.primary_memory$$_layout</string>

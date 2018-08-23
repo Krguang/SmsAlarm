@@ -1,41 +1,41 @@
 
 /**
-  ******************************************************************************
-  * @file           : main.c
-  * @brief          : Main program body
-  ******************************************************************************
-  ** This notice applies to any and all portions of this file
-  * that are not between comment pairs USER CODE BEGIN and
-  * USER CODE END. Other portions of this file, whether 
-  * inserted by the user or by software development tools
-  * are owned by their respective copyright owners.
-  *
-  * COPYRIGHT(c) 2018 STMicroelectronics
-  *
-  * Redistribution and use in source and binary forms, with or without modification,
-  * are permitted provided that the following conditions are met:
-  *   1. Redistributions of source code must retain the above copyright notice,
-  *      this list of conditions and the following disclaimer.
-  *   2. Redistributions in binary form must reproduce the above copyright notice,
-  *      this list of conditions and the following disclaimer in the documentation
-  *      and/or other materials provided with the distribution.
-  *   3. Neither the name of STMicroelectronics nor the names of its contributors
-  *      may be used to endorse or promote products derived from this software
-  *      without specific prior written permission.
-  *
-  * THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
-  * AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
-  * IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-  * DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-  * FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-  * DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-  * SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-  * CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-  * OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
-  * OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-  *
-  ******************************************************************************
-  */
+******************************************************************************
+* @file           : main.c
+* @brief          : Main program body
+******************************************************************************
+** This notice applies to any and all portions of this file
+* that are not between comment pairs USER CODE BEGIN and
+* USER CODE END. Other portions of this file, whether
+* inserted by the user or by software development tools
+* are owned by their respective copyright owners.
+*
+* COPYRIGHT(c) 2018 STMicroelectronics
+*
+* Redistribution and use in source and binary forms, with or without modification,
+* are permitted provided that the following conditions are met:
+*   1. Redistributions of source code must retain the above copyright notice,
+*      this list of conditions and the following disclaimer.
+*   2. Redistributions in binary form must reproduce the above copyright notice,
+*      this list of conditions and the following disclaimer in the documentation
+*      and/or other materials provided with the distribution.
+*   3. Neither the name of STMicroelectronics nor the names of its contributors
+*      may be used to endorse or promote products derived from this software
+*      without specific prior written permission.
+*
+* THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+* AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+* IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+* DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+* FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+* DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+* SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+* CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+* OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+* OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+*
+******************************************************************************
+*/
 /* Includes ------------------------------------------------------------------*/
 #include "main.h"
 #include "stm32f1xx_hal.h"
@@ -45,8 +45,8 @@
 
 /* USER CODE BEGIN Includes */
 
-#include <stdlib.h>
-#include <string.h>
+//#include <stdlib.h>
+//#include <string.h>
 
 
 /* USER CODE END Includes */
@@ -77,7 +77,7 @@ void SystemClock_Config(void);
 
 void gasAlarm(void);
 void muteStatus(void);
-void putInMQ(void);
+//void putInMQ(void);
 
 
 const uint8_t KEY_TIME = 5;							//按键消抖延时时间 50ms
@@ -87,7 +87,7 @@ uint16_t keyTimeCount;				//按键去抖演示计数器
 uint8_t keyStatus;					//按键状态   按下：1；抬起：0
 uint8_t muteFlag;					//1:静音；0：有声音
 
-const uint8_t COUNT_TIME = 100;
+const uint8_t COUNT_TIME = 60;
 
 uint8_t lowLevelCount[14];
 uint8_t highLevelCount[14];
@@ -95,6 +95,7 @@ uint8_t gasStatus[14];
 uint8_t lowLevelTemp[14];
 uint8_t gasStatusTemp[14];
 
+/*
 
 uint8_t yangQiUpCode = 0;
 uint8_t yangQiNormalCode = 100;
@@ -123,12 +124,7 @@ uint8_t YaSuoLowCode = 11;
 uint8_t co2UpCode = 12;
 uint8_t co2NormalCode = 112;
 uint8_t co2LowCode = 13;
-
-uint8_t MQ[255];			//报警的消息队列
-uint8_t mq_size;
-
-uint16_t i;
-
+*/
 
 struct node
 {
@@ -168,115 +164,122 @@ struct node *pHeader;
 /* USER CODE END 0 */
 
 /**
-  * @brief  The application entry point.
-  *
-  * @retval None
-  */
+* @brief  The application entry point.
+*
+* @retval None
+*/
 int main(void)
 {
-  /* USER CODE BEGIN 1 */
+	/* USER CODE BEGIN 1 */
 
 
 
-  /* USER CODE END 1 */
+	/* USER CODE END 1 */
 
-  /* MCU Configuration----------------------------------------------------------*/
+	/* MCU Configuration----------------------------------------------------------*/
 
-  /* Reset of all peripherals, Initializes the Flash interface and the Systick. */
-  HAL_Init();
+	/* Reset of all peripherals, Initializes the Flash interface and the Systick. */
+	HAL_Init();
 
-  /* USER CODE BEGIN Init */
+	/* USER CODE BEGIN Init */
 
-  /* USER CODE END Init */
+	/* USER CODE END Init */
 
-  /* Configure the system clock */
-  SystemClock_Config();
+	/* Configure the system clock */
+	SystemClock_Config();
 
-  /* USER CODE BEGIN SysInit */
+	/* USER CODE BEGIN SysInit */
 
-  /* USER CODE END SysInit */
+	/* USER CODE END SysInit */
 
-  /* Initialize all configured peripherals */
-  MX_GPIO_Init();
-  MX_USART1_UART_Init();
-  MX_TIM3_Init();
-  MX_TIM4_Init();
-  /* USER CODE BEGIN 2 */
+	/* Initialize all configured peripherals */
+	MX_GPIO_Init();
+	MX_USART1_UART_Init();
+	MX_TIM3_Init();
+	MX_TIM4_Init();
+	/* USER CODE BEGIN 2 */
 
 	HAL_TIM_Base_Start_IT(&htim3);
+	HAL_TIM_Base_Start_IT(&htim4);
 
 	RS485Send;
 
 	pHeader = create_node(200);
 
-  /* USER CODE END 2 */
 
-  /* Infinite loop */
-  /* USER CODE BEGIN WHILE */
+	for (size_t i = 0; i < 14; i++)
+	{
+		highLevelCount[i] = 200;	//初始化高电平数据，防止上电一分钟后报 气体恢复
+	}
+
+	/* USER CODE END 2 */
+
+	/* Infinite loop */
+	/* USER CODE BEGIN WHILE */
 	while (1)
 	{
 
-  /* USER CODE END WHILE */
+		/* USER CODE END WHILE */
 
-  /* USER CODE BEGIN 3 */
+		/* USER CODE BEGIN 3 */
 
 		gasAlarm();
 		muteStatus();
-		putInMQ();
+		//putInMQ();
 
 	}
-  /* USER CODE END 3 */
+	/* USER CODE END 3 */
 
 }
 
 /**
-  * @brief System Clock Configuration
-  * @retval None
-  */
+* @brief System Clock Configuration
+* @retval None
+*/
 void SystemClock_Config(void)
 {
 
-  RCC_OscInitTypeDef RCC_OscInitStruct;
-  RCC_ClkInitTypeDef RCC_ClkInitStruct;
+	RCC_OscInitTypeDef RCC_OscInitStruct;
+	RCC_ClkInitTypeDef RCC_ClkInitStruct;
 
-    /**Initializes the CPU, AHB and APB busses clocks 
-    */
-  RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
-  RCC_OscInitStruct.HSEState = RCC_HSE_ON;
-  RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
-  RCC_OscInitStruct.HSIState = RCC_HSI_ON;
-  RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
-  RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
-  RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
-  if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
-  {
-    _Error_Handler(__FILE__, __LINE__);
-  }
+	/**Initializes the CPU, AHB and APB busses clocks
+	*/
+	RCC_OscInitStruct.OscillatorType = RCC_OSCILLATORTYPE_HSE;
+	RCC_OscInitStruct.HSEState = RCC_HSE_ON;
+	RCC_OscInitStruct.HSEPredivValue = RCC_HSE_PREDIV_DIV1;
+	RCC_OscInitStruct.HSIState = RCC_HSI_ON;
+	RCC_OscInitStruct.PLL.PLLState = RCC_PLL_ON;
+	RCC_OscInitStruct.PLL.PLLSource = RCC_PLLSOURCE_HSE;
+	RCC_OscInitStruct.PLL.PLLMUL = RCC_PLL_MUL9;
+	if (HAL_RCC_OscConfig(&RCC_OscInitStruct) != HAL_OK)
+	{
+		_Error_Handler(__FILE__, __LINE__);
+	}
 
-    /**Initializes the CPU, AHB and APB busses clocks 
-    */
-  RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK|RCC_CLOCKTYPE_SYSCLK
-                              |RCC_CLOCKTYPE_PCLK1|RCC_CLOCKTYPE_PCLK2;
-  RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
-  RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
-  RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
-  RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
+	/**Initializes the CPU, AHB and APB busses clocks
+	*/
+	RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_SYSCLK
+		| RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2;
+	RCC_ClkInitStruct.SYSCLKSource = RCC_SYSCLKSOURCE_PLLCLK;
+	RCC_ClkInitStruct.AHBCLKDivider = RCC_SYSCLK_DIV1;
+	RCC_ClkInitStruct.APB1CLKDivider = RCC_HCLK_DIV2;
+	RCC_ClkInitStruct.APB2CLKDivider = RCC_HCLK_DIV1;
 
-  if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
-  {
-    _Error_Handler(__FILE__, __LINE__);
-  }
+	if (HAL_RCC_ClockConfig(&RCC_ClkInitStruct, FLASH_LATENCY_2) != HAL_OK)
+	{
+		_Error_Handler(__FILE__, __LINE__);
+	}
 
-    /**Configure the Systick interrupt time 
-    */
-  HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq()/1000);
+	/**Configure the Systick interrupt time
+	*/
+	HAL_SYSTICK_Config(HAL_RCC_GetHCLKFreq() / 1000);
 
-    /**Configure the Systick 
-    */
-  HAL_SYSTICK_CLKSourceConfig(SYSTICK_CLKSOURCE_HCLK);
+	/**Configure the Systick
+	*/
+	HAL_SYSTICK_CLKSourceConfig(SYSTICK_CLKSOURCE_HCLK);
 
-  /* SysTick_IRQn interrupt configuration */
-  HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
+	/* SysTick_IRQn interrupt configuration */
+	HAL_NVIC_SetPriority(SysTick_IRQn, 0, 0);
 }
 
 /* USER CODE BEGIN 4 */
@@ -300,7 +303,7 @@ void muteStatus() {
 	}
 }
 
-
+/*
 //把要发送的信息存入队列
 void putInMQ() {
 
@@ -352,6 +355,7 @@ void judgeAlarmMessege(uint8_t code) {		//通过代号判断要发送的短信
 }
 
 
+
 void getOutMessege() {
 
 	struct node *p = NULL;
@@ -374,16 +378,325 @@ void getOutMessege() {
 		}
 	}
 }
+*/
+
+//报警扫描函数
+void alarmScan() {
+
+
+	if (1 == HAL_GPIO_ReadPin(yangQiUp_in_GPIO_Port, yangQiUp_in_Pin))		//IO 是高电平 对应没有报警状态  
+	{
+		lowLevelCount[0] = 57;
+		highLevelCount[0]++;
+		if (highLevelCount[0] > 200)
+		{
+			highLevelCount[0] = 200;
+		}
+		if (highLevelCount[0] == 10) {
+
+			printf("17612168015:0:氧气超压恢复正常\n");
+		}
+	}
+	else {
+		highLevelCount[0] = 0;
+		lowLevelCount[0]++;
+		if (lowLevelCount[0] > COUNT_TIME) {
+			lowLevelCount[0] = 0;
+			printf("17612168015:0:氧气超压报警\n");
+		}
+	}
+
+	if (1 == HAL_GPIO_ReadPin(yangQiLow_in_GPIO_Port, yangQiLow_in_Pin))		//IO 是高电平 对应没有报警状态  
+	{
+		lowLevelCount[1] = 57;
+		highLevelCount[1]++;
+		if (highLevelCount[1] > 200)
+		{
+			highLevelCount[1] = 200;
+		}
+		if (highLevelCount[1] == 10) {
+
+			printf("17612168015:0:氧气欠压恢复正常\n");
+		}
+	}
+	else {
+		highLevelCount[1] = 0;
+		lowLevelCount[1]++;
+		if (lowLevelCount[1] > COUNT_TIME) {
+			lowLevelCount[1] = 0;
+			printf("17612168015:0:氧气欠压报警\n");
+		}
+	}
+
+	if (1 == HAL_GPIO_ReadPin(yaQiUp_in_GPIO_Port, yaQiUp_in_Pin))		//IO 是高电平 对应没有报警状态  
+	{
+		lowLevelCount[2] = 57;
+		highLevelCount[2]++;
+		if (highLevelCount[2] > 200)
+		{
+			highLevelCount[2] = 200;
+		}
+		if (highLevelCount[2] == 10) {
+
+			printf("17612168015:0:氩气超压恢复正常\n");
+		}
+	}
+	else {
+		highLevelCount[2] = 0;
+		lowLevelCount[2]++;
+		if (lowLevelCount[2] > COUNT_TIME) {
+			lowLevelCount[2] = 0;
+			printf("17612168015:0:氩气超压报警\n");
+		}
+	}
+
+	if (1 == HAL_GPIO_ReadPin(yaQiLow_in_GPIO_Port, yaQiLow_in_Pin))		//IO 是高电平 对应没有报警状态  
+	{
+		lowLevelCount[3] = 57;
+		highLevelCount[3]++;
+		if (highLevelCount[3] > 200)
+		{
+			highLevelCount[3] = 200;
+		}
+		if (highLevelCount[3] == 10) {
+
+			printf("17612168015:0:氩气欠压恢复正常\n");
+		}
+	}
+	else {
+		highLevelCount[3] = 0;
+		lowLevelCount[3]++;
+		if (lowLevelCount[3] > COUNT_TIME) {
+			lowLevelCount[3] = 0;
+			printf("17612168015:0:氩气欠压报警\n");
+		}
+	}
+
+	if (1 == HAL_GPIO_ReadPin(xiaoQiUp_in_GPIO_Port, xiaoQiUp_in_Pin))		//IO 是高电平 对应没有报警状态  
+	{
+		lowLevelCount[4] = 57;
+		highLevelCount[4]++;
+		if (highLevelCount[4] > 200)
+		{
+			highLevelCount[4] = 200;
+		}
+		if (highLevelCount[4] == 10) {
+
+			printf("17612168015:0:笑气超压恢复正常\n");
+		}
+	}
+	else {
+		highLevelCount[4] = 0;
+		lowLevelCount[4]++;
+		if (lowLevelCount[4] > COUNT_TIME) {
+			lowLevelCount[4] = 0;
+			printf("17612168015:0:笑气超压报警\n");
+		}
+	}
+
+	if (1 == HAL_GPIO_ReadPin(xiaoQiLow_in_GPIO_Port, xiaoQiLow_in_Pin))		//IO 是高电平 对应没有报警状态  
+	{
+		lowLevelCount[5] = 57;
+		highLevelCount[5]++;
+		if (highLevelCount[5] > 200)
+		{
+			highLevelCount[5] = 200;
+		}
+		if (highLevelCount[5] == 10) {
+
+			printf("17612168015:0:笑气欠压恢复正常\n");
+		}
+	}
+	else {
+		highLevelCount[5] = 0;
+		lowLevelCount[5]++;
+		if (lowLevelCount[5] > COUNT_TIME) {
+			lowLevelCount[5] = 0;
+			printf("17612168015:0:笑气欠压报警\n");
+		}
+	}
+
+	if (1 == HAL_GPIO_ReadPin(danQiUp_in_GPIO_Port, danQiUp_in_Pin))		//IO 是高电平 对应没有报警状态  
+	{
+		lowLevelCount[6] = 57;
+		highLevelCount[6]++;
+		if (highLevelCount[6] > 200)
+		{
+			highLevelCount[6] = 200;
+		}
+		if (highLevelCount[6] == 10) {
+
+			printf("17612168015:0:氮气超压恢复正常\n");
+		}
+	}
+	else {
+		highLevelCount[6] = 0;
+		lowLevelCount[6]++;
+		if (lowLevelCount[6] > COUNT_TIME) {
+			lowLevelCount[6] = 0;
+			printf("17612168015:0:氮气超压报警\n");
+		}
+	}
+
+	if (1 == HAL_GPIO_ReadPin(danQiLow_in_GPIO_Port, danQiLow_in_Pin))		//IO 是高电平 对应没有报警状态  
+	{
+		lowLevelCount[7] = 57;
+		highLevelCount[7]++;
+		if (highLevelCount[7] > 200)
+		{
+			highLevelCount[7] = 200;
+		}
+		if (highLevelCount[7] == 10) {
+
+			printf("17612168015:0:氮气欠压恢复正常\n");
+		}
+	}
+	else {
+		highLevelCount[7] = 0;
+		lowLevelCount[7]++;
+		if (lowLevelCount[7] > COUNT_TIME) {
+			lowLevelCount[7] = 0;
+			printf("17612168015:0:氮气欠压报警\n");
+		}
+	}
+
+	if (1 == HAL_GPIO_ReadPin(fuYaUp_in_GPIO_Port, fuYaUp_in_Pin))		//IO 是高电平 对应没有报警状态  
+	{
+		lowLevelCount[8] = 57;
+		highLevelCount[8]++;
+		if (highLevelCount[8] > 200)
+		{
+			highLevelCount[8] = 200;
+		}
+		if (highLevelCount[8] == 10) {
+
+			printf("17612168015:0:负压吸引超压恢复正常\n");
+		}
+	}
+	else {
+		highLevelCount[8] = 0;
+		lowLevelCount[8]++;
+		if (lowLevelCount[8] > COUNT_TIME) {
+			lowLevelCount[8] = 0;
+			printf("17612168015:0:负压吸引超压报警\n");
+		}
+	}
+
+	if (1 == HAL_GPIO_ReadPin(fuYaLow_in_GPIO_Port, fuYaLow_in_Pin))		//IO 是高电平 对应没有报警状态  
+	{
+		lowLevelCount[9] = 57;
+		highLevelCount[9]++;
+		if (highLevelCount[9] > 200)
+		{
+			highLevelCount[9] = 200;
+		}
+		if (highLevelCount[9] == 10) {
+
+			printf("17612168015:0:负压吸引欠压恢复正常\n");
+		}
+	}
+	else {
+		highLevelCount[9] = 0;
+		lowLevelCount[9]++;
+		if (lowLevelCount[9] > COUNT_TIME) {
+			lowLevelCount[9] = 0;
+			printf("17612168015:0:负压吸引欠压报警\n");
+		}
+	}
+
+	if (1 == HAL_GPIO_ReadPin(yaSuoUp_in_GPIO_Port, yaSuoUp_in_Pin))		//IO 是高电平 对应没有报警状态  
+	{
+		lowLevelCount[10] = 57;
+		highLevelCount[10]++;
+		if (highLevelCount[10] > 200)
+		{
+			highLevelCount[10] = 200;
+		}
+		if (highLevelCount[10] == 10) {
+
+			printf("17612168015:0:压缩空气超压恢复正常\n");
+		}
+	}
+	else {
+		highLevelCount[10] = 0;
+		lowLevelCount[10]++;
+		if (lowLevelCount[10] > COUNT_TIME) {
+			lowLevelCount[10] = 0;
+			printf("17612168015:0:压缩空气超压报警\n");
+		}
+	}
+
+	if (1 == HAL_GPIO_ReadPin(yaSuoLow_in_GPIO_Port, yaSuoLow_in_Pin))		//IO 是高电平 对应没有报警状态  
+	{
+		lowLevelCount[11] = 57;
+		highLevelCount[11]++;
+		if (highLevelCount[11] > 200)
+		{
+			highLevelCount[11] = 200;
+		}
+		if (highLevelCount[11] == 10) {
+
+			printf("17612168015:0:压缩空气欠压恢复正常\n");
+		}
+	}
+	else {
+		highLevelCount[11] = 0;
+		lowLevelCount[11]++;
+		if (lowLevelCount[11] > COUNT_TIME) {
+			lowLevelCount[11] = 0;
+			printf("17612168015:0:压缩空气欠压报警\n");
+		}
+	}
+
+	if (1 == HAL_GPIO_ReadPin(co2Up_in_GPIO_Port, co2Up_in_Pin))		//IO 是高电平 对应没有报警状态  
+	{
+		lowLevelCount[12] = 57;
+		highLevelCount[12]++;
+		if (highLevelCount[12] > 200)
+		{
+			highLevelCount[12] = 200;
+		}
+		if (highLevelCount[12] == 10) {
+
+			printf("17612168015:0:二氧化碳超压恢复正常\n");
+		}
+	}
+	else {
+		highLevelCount[12] = 0;
+		lowLevelCount[12]++;
+		if (lowLevelCount[12] > COUNT_TIME) {
+			lowLevelCount[12] = 0;
+			printf("17612168015:0:二氧化碳超压报警\n");
+		}
+	}
+
+	if (1 == HAL_GPIO_ReadPin(co2Low_in_GPIO_Port, co2Low_in_Pin))		//IO 是高电平 对应没有报警状态  
+	{
+		lowLevelCount[13] = 57;
+		highLevelCount[13]++;
+		if (highLevelCount[13] > 200)
+		{
+			highLevelCount[13] = 200;
+		}
+		if (highLevelCount[13] == 10) {
+
+			printf("17612168015:0:二氧化碳欠压恢复正常\n");
+		}
+	}
+	else {
+		highLevelCount[13] = 0;
+		lowLevelCount[13]++;
+		if (lowLevelCount[13] > COUNT_TIME) {
+			lowLevelCount[13] = 0;
+			printf("17612168015:0:二氧化碳欠压报警\n");
+		}
+	}
+
+}
+
 
 //按键扫描函数
 void keyScan() {
-
-	i++;
-	if (i>1000) {
-		i = 0;
-		getOutMessege();
-	}
-
 
 
 	if (1 == HAL_GPIO_ReadPin(mute_bt_GPIO_Port, mute_bt_Pin))		//IO 是高电平，说明按键没有被按下，这时要及时清零一些标志位
@@ -403,6 +716,7 @@ void keyScan() {
 	}
 
 
+	/*
 
 	if (1 == HAL_GPIO_ReadPin(yangQiUp_in_GPIO_Port, yangQiUp_in_Pin))		//IO 是高电平 对应没有报警状态  gasStatus[0] = 0;
 	{
@@ -753,17 +1067,19 @@ void keyScan() {
 			gasStatus[13] = 1;
 		}
 	}
-
+	*/
 }
 
 
 void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
 {
-	/* USER CODE BEGIN Callback 0 */
 
-	/* USER CODE END Callback 0 */
-	if (htim->Instance == TIM3) {
+	if (htim->Instance == TIM3) {	//10ms 定时器
 		keyScan();
+	}
+
+	if (htim->Instance == TIM4) {	//1s定时器
+		alarmScan();
 	}
 
 }
@@ -962,44 +1278,44 @@ void gasAlarm() {
 /* USER CODE END 4 */
 
 /**
-  * @brief  This function is executed in case of error occurrence.
-  * @param  file: The file name as string.
-  * @param  line: The line in file as a number.
-  * @retval None
-  */
+* @brief  This function is executed in case of error occurrence.
+* @param  file: The file name as string.
+* @param  line: The line in file as a number.
+* @retval None
+*/
 void _Error_Handler(char *file, int line)
 {
-  /* USER CODE BEGIN Error_Handler_Debug */
+	/* USER CODE BEGIN Error_Handler_Debug */
 	/* User can add his own implementation to report the HAL error return state */
 	while (1)
 	{
 	}
-  /* USER CODE END Error_Handler_Debug */
+	/* USER CODE END Error_Handler_Debug */
 }
 
 #ifdef  USE_FULL_ASSERT
 /**
-  * @brief  Reports the name of the source file and the source line number
-  *         where the assert_param error has occurred.
-  * @param  file: pointer to the source file name
-  * @param  line: assert_param error line source number
-  * @retval None
-  */
+* @brief  Reports the name of the source file and the source line number
+*         where the assert_param error has occurred.
+* @param  file: pointer to the source file name
+* @param  line: assert_param error line source number
+* @retval None
+*/
 void assert_failed(uint8_t* file, uint32_t line)
-{ 
-  /* USER CODE BEGIN 6 */
+{
+	/* USER CODE BEGIN 6 */
 	/* User can add his own implementation to report the file name and line number,
 	tex: printf("Wrong parameters value: file %s on line %d\r\n", file, line) */
-  /* USER CODE END 6 */
+	/* USER CODE END 6 */
 }
 #endif /* USE_FULL_ASSERT */
 
 /**
-  * @}
-  */
+* @}
+*/
 
 /**
-  * @}
-  */
+* @}
+*/
 
 /************************ (C) COPYRIGHT STMicroelectronics *****END OF FILE****/

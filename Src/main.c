@@ -394,7 +394,7 @@ void alarmScan() {
 		}
 		if (highLevelCount[0] == 10) {
 
-			printf("17612168015:0:氧气超压恢复正常\n");
+			printf("13600501179:0:氧气超压恢复正常\n");
 		}
 	}
 	else {
@@ -402,7 +402,7 @@ void alarmScan() {
 		lowLevelCount[0]++;
 		if (lowLevelCount[0] > COUNT_TIME) {
 			lowLevelCount[0] = 0;
-			printf("17612168015:0:氧气超压报警\n");
+			printf("13600501179:0:氧气超压报警\n");
 		}
 	}
 
@@ -416,7 +416,7 @@ void alarmScan() {
 		}
 		if (highLevelCount[1] == 10) {
 
-			printf("17612168015:0:氧气欠压恢复正常\n");
+			printf("13600501179:0:氧气欠压恢复正常\n");
 		}
 	}
 	else {
@@ -424,7 +424,7 @@ void alarmScan() {
 		lowLevelCount[1]++;
 		if (lowLevelCount[1] > COUNT_TIME) {
 			lowLevelCount[1] = 0;
-			printf("17612168015:0:氧气欠压报警\n");
+			printf("13600501179:0:氧气欠压报警\n");
 		}
 	}
 
@@ -438,7 +438,7 @@ void alarmScan() {
 		}
 		if (highLevelCount[2] == 10) {
 
-			printf("17612168015:0:氩气超压恢复正常\n");
+			printf("13600501179:0:氩气超压恢复正常\n");
 		}
 	}
 	else {
@@ -446,7 +446,7 @@ void alarmScan() {
 		lowLevelCount[2]++;
 		if (lowLevelCount[2] > COUNT_TIME) {
 			lowLevelCount[2] = 0;
-			printf("17612168015:0:氩气超压报警\n");
+			printf("13600501179:0:氩气超压报警\n");
 		}
 	}
 
@@ -460,7 +460,7 @@ void alarmScan() {
 		}
 		if (highLevelCount[3] == 10) {
 
-			printf("17612168015:0:氩气欠压恢复正常\n");
+			printf("13600501179:0:氩气欠压恢复正常\n");
 		}
 	}
 	else {
@@ -468,7 +468,7 @@ void alarmScan() {
 		lowLevelCount[3]++;
 		if (lowLevelCount[3] > COUNT_TIME) {
 			lowLevelCount[3] = 0;
-			printf("17612168015:0:氩气欠压报警\n");
+			printf("13600501179:0:氩气欠压报警\n");
 		}
 	}
 
@@ -482,7 +482,7 @@ void alarmScan() {
 		}
 		if (highLevelCount[4] == 10) {
 
-			printf("17612168015:0:笑气超压恢复正常\n");
+			printf("13600501179:0:笑气超压恢复正常\n");
 		}
 	}
 	else {
@@ -490,7 +490,7 @@ void alarmScan() {
 		lowLevelCount[4]++;
 		if (lowLevelCount[4] > COUNT_TIME) {
 			lowLevelCount[4] = 0;
-			printf("17612168015:0:笑气超压报警\n");
+			printf("13600501179:0:笑气超压报警\n");
 		}
 	}
 
@@ -504,7 +504,7 @@ void alarmScan() {
 		}
 		if (highLevelCount[5] == 10) {
 
-			printf("17612168015:0:笑气欠压恢复正常\n");
+			printf("13600501179:0:笑气欠压恢复正常\n");
 		}
 	}
 	else {
@@ -512,7 +512,7 @@ void alarmScan() {
 		lowLevelCount[5]++;
 		if (lowLevelCount[5] > COUNT_TIME) {
 			lowLevelCount[5] = 0;
-			printf("17612168015:0:笑气欠压报警\n");
+			printf("13600501179:0:笑气欠压报警\n");
 		}
 	}
 
@@ -526,7 +526,7 @@ void alarmScan() {
 		}
 		if (highLevelCount[6] == 10) {
 
-			printf("17612168015:0:氮气超压恢复正常\n");
+			printf("13600501179:0:氮气超压恢复正常\n");
 		}
 	}
 	else {
@@ -534,7 +534,7 @@ void alarmScan() {
 		lowLevelCount[6]++;
 		if (lowLevelCount[6] > COUNT_TIME) {
 			lowLevelCount[6] = 0;
-			printf("17612168015:0:氮气超压报警\n");
+			printf("13600501179:0:氮气超压报警\n");
 		}
 	}
 
@@ -548,7 +548,7 @@ void alarmScan() {
 		}
 		if (highLevelCount[7] == 10) {
 
-			printf("17612168015:0:氮气欠压恢复正常\n");
+			printf("13600501179:0:氮气欠压恢复正常\n");
 		}
 	}
 	else {
@@ -556,7 +556,7 @@ void alarmScan() {
 		lowLevelCount[7]++;
 		if (lowLevelCount[7] > COUNT_TIME) {
 			lowLevelCount[7] = 0;
-			printf("17612168015:0:氮气欠压报警\n");
+			printf("13600501179:0:氮气欠压报警\n");
 		}
 	}
 
@@ -570,7 +570,7 @@ void alarmScan() {
 		}
 		if (highLevelCount[8] == 10) {
 
-			printf("17612168015:0:负压吸引超压恢复正常\n");
+			printf("13600501179:0:负压吸引超压恢复正常\n");
 		}
 	}
 	else {
@@ -578,7 +578,7 @@ void alarmScan() {
 		lowLevelCount[8]++;
 		if (lowLevelCount[8] > COUNT_TIME) {
 			lowLevelCount[8] = 0;
-			printf("17612168015:0:负压吸引超压报警\n");
+			printf("13600501179:0:负压吸引超压报警\n");
 		}
 	}
 
@@ -592,7 +592,7 @@ void alarmScan() {
 		}
 		if (highLevelCount[9] == 10) {
 
-			printf("17612168015:0:负压吸引欠压恢复正常\n");
+			printf("13600501179:0:负压吸引欠压恢复正常\n");
 		}
 	}
 	else {
@@ -600,7 +600,7 @@ void alarmScan() {
 		lowLevelCount[9]++;
 		if (lowLevelCount[9] > COUNT_TIME) {
 			lowLevelCount[9] = 0;
-			printf("17612168015:0:负压吸引欠压报警\n");
+			printf("13600501179:0:负压吸引欠压报警\n");
 		}
 	}
 
@@ -614,7 +614,7 @@ void alarmScan() {
 		}
 		if (highLevelCount[10] == 10) {
 
-			printf("17612168015:0:压缩空气超压恢复正常\n");
+			printf("13600501179:0:压缩空气超压恢复正常\n");
 		}
 	}
 	else {
@@ -622,7 +622,7 @@ void alarmScan() {
 		lowLevelCount[10]++;
 		if (lowLevelCount[10] > COUNT_TIME) {
 			lowLevelCount[10] = 0;
-			printf("17612168015:0:压缩空气超压报警\n");
+			printf("13600501179:0:压缩空气超压报警\n");
 		}
 	}
 
@@ -636,7 +636,7 @@ void alarmScan() {
 		}
 		if (highLevelCount[11] == 10) {
 
-			printf("17612168015:0:压缩空气欠压恢复正常\n");
+			printf("13600501179:0:压缩空气欠压恢复正常\n");
 		}
 	}
 	else {
@@ -644,7 +644,7 @@ void alarmScan() {
 		lowLevelCount[11]++;
 		if (lowLevelCount[11] > COUNT_TIME) {
 			lowLevelCount[11] = 0;
-			printf("17612168015:0:压缩空气欠压报警\n");
+			printf("13600501179:0:压缩空气欠压报警\n");
 		}
 	}
 
@@ -658,7 +658,7 @@ void alarmScan() {
 		}
 		if (highLevelCount[12] == 10) {
 
-			printf("17612168015:0:二氧化碳超压恢复正常\n");
+			printf("13600501179:0:二氧化碳超压恢复正常\n");
 		}
 	}
 	else {
@@ -666,7 +666,7 @@ void alarmScan() {
 		lowLevelCount[12]++;
 		if (lowLevelCount[12] > COUNT_TIME) {
 			lowLevelCount[12] = 0;
-			printf("17612168015:0:二氧化碳超压报警\n");
+			printf("13600501179:0:二氧化碳超压报警\n");
 		}
 	}
 
@@ -680,7 +680,7 @@ void alarmScan() {
 		}
 		if (highLevelCount[13] == 10) {
 
-			printf("17612168015:0:二氧化碳欠压恢复正常\n");
+			printf("13600501179:0:二氧化碳欠压恢复正常\n");
 		}
 	}
 	else {
@@ -688,7 +688,7 @@ void alarmScan() {
 		lowLevelCount[13]++;
 		if (lowLevelCount[13] > COUNT_TIME) {
 			lowLevelCount[13] = 0;
-			printf("17612168015:0:二氧化碳欠压报警\n");
+			printf("13600501179:0:二氧化碳欠压报警\n");
 		}
 	}
 

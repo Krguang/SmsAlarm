@@ -80,6 +80,7 @@
   <ItemGroup />
   <ItemGroup>
     <ClCompile Include="..\Src\gpio.c" />
+    <ClCompile Include="..\Src\smsAlarm.c" />
     <ClCompile Include="..\Src\system_stm32f1xx.c" />
     <ClCompile Include="..\Src\tim.c" />
     <ClCompile Include="..\Src\usart.c" />
@@ -101,6 +102,7 @@
     <None Include="stm32.mak" />
     <ClCompile Include="$(BSP_ROOT)\STM32F1xxxx\StartupFiles\startup_stm32f103xe.c" />
     <ClInclude Include="..\Inc\gpio.h" />
+    <ClInclude Include="..\Inc\smsAlarm.h" />
     <ClInclude Include="..\Inc\tim.h" />
     <ClInclude Include="..\Inc\usart.h" />
     <ClInclude Include="..\Inc\stm32f1xx_it.h" />

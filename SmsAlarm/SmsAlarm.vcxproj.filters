@@ -339,5 +339,13 @@
     <ClCompile Include="..\Src\system_stm32f1xx.c">
       <Filter>Source files\Startup</Filter>
     </ClCompile>
+    <ClCompile Include="..\Src\smsAlarm.c">
+      <Filter>Source files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\Inc\smsAlarm.h">
+      <Filter>Header files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

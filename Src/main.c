@@ -30,7 +30,7 @@
 
 //#include <stdlib.h>
 //#include <string.h>
-
+#include "smsAlarm.h"
 
 /* USER CODE END Includes */
 
@@ -86,13 +86,6 @@ uint16_t keyTimeCount;				//按键去抖演示计数器
 uint8_t keyStatus;					//按键状态   按下：1；抬起：0
 uint8_t muteFlag;					//1:静音；0：有声音
 
-const uint16_t COUNT_TIME = 60;
-
-uint16_t lowLevelCount[14];
-uint16_t highLevelCount[14];
-uint16_t gasStatus[14];
-uint16_t lowLevelTemp[14];
-uint16_t gasStatusTemp[14];
 
 /*
 
@@ -210,6 +203,7 @@ int main(void)
 	for (size_t i = 0; i < 14; i++)
 	{
 		highLevelCount[i] = 200;	//初始化高电平数据，防止上电一分钟后报 气体恢复
+		countTime[i] = COUNT_TIME_START;
 	}
 
   /* USER CODE END 2 */
@@ -374,321 +368,6 @@ void getOutMessege() {
 }
 */
 
-//报警扫描函数
-void alarmScan() {
-
-
-	if (1 == HAL_GPIO_ReadPin(yangQiUp_in_GPIO_Port, yangQiUp_in_Pin))		//IO 是高电平 对应没有报警状态  
-	{
-		lowLevelCount[0] = 57;
-		highLevelCount[0]++;
-		if (highLevelCount[0] > 200)
-		{
-			highLevelCount[0] = 200;
-		}
-		if (highLevelCount[0] == 10) {
-
-			printf("13600501179:0:氧气超压恢复正常\n");
-		}
-	}
-	else {
-		highLevelCount[0] = 0;
-		lowLevelCount[0]++;
-		if (lowLevelCount[0] > COUNT_TIME) {
-			lowLevelCount[0] = 0;
-			printf("13600501179:0:氧气超压报警\n");
-		}
-	}
-
-	if (1 == HAL_GPIO_ReadPin(yangQiLow_in_GPIO_Port, yangQiLow_in_Pin))		//IO 是高电平 对应没有报警状态  
-	{
-		lowLevelCount[1] = 57;
-		highLevelCount[1]++;
-		if (highLevelCount[1] > 200)
-		{
-			highLevelCount[1] = 200;
-		}
-		if (highLevelCount[1] == 10) {
-
-			printf("13600501179:0:氧气欠压恢复正常\n");
-		}
-	}
-	else {
-		highLevelCount[1] = 0;
-		lowLevelCount[1]++;
-		if (lowLevelCount[1] > COUNT_TIME) {
-			lowLevelCount[1] = 0;
-			printf("13600501179:0:氧气欠压报警\n");
-		}
-	}
-
-	if (1 == HAL_GPIO_ReadPin(yaQiUp_in_GPIO_Port, yaQiUp_in_Pin))		//IO 是高电平 对应没有报警状态  
-	{
-		lowLevelCount[2] = 57;
-		highLevelCount[2]++;
-		if (highLevelCount[2] > 200)
-		{
-			highLevelCount[2] = 200;
-		}
-		if (highLevelCount[2] == 10) {
-
-			printf("13600501179:0:氩气超压恢复正常\n");
-		}
-	}
-	else {
-		highLevelCount[2] = 0;
-		lowLevelCount[2]++;
-		if (lowLevelCount[2] > COUNT_TIME) {
-			lowLevelCount[2] = 0;
-			printf("13600501179:0:氩气超压报警\n");
-		}
-	}
-
-	if (1 == HAL_GPIO_ReadPin(yaQiLow_in_GPIO_Port, yaQiLow_in_Pin))		//IO 是高电平 对应没有报警状态  
-	{
-		lowLevelCount[3] = 57;
-		highLevelCount[3]++;
-		if (highLevelCount[3] > 200)
-		{
-			highLevelCount[3] = 200;
-		}
-		if (highLevelCount[3] == 10) {
-
-			printf("13600501179:0:氩气欠压恢复正常\n");
-		}
-	}
-	else {
-		highLevelCount[3] = 0;
-		lowLevelCount[3]++;
-		if (lowLevelCount[3] > COUNT_TIME) {
-			lowLevelCount[3] = 0;
-			printf("13600501179:0:氩气欠压报警\n");
-		}
-	}
-
-	if (1 == HAL_GPIO_ReadPin(xiaoQiUp_in_GPIO_Port, xiaoQiUp_in_Pin))		//IO 是高电平 对应没有报警状态  
-	{
-		lowLevelCount[4] = 57;
-		highLevelCount[4]++;
-		if (highLevelCount[4] > 200)
-		{
-			highLevelCount[4] = 200;
-		}
-		if (highLevelCount[4] == 10) {
-
-			printf("13600501179:0:笑气超压恢复正常\n");
-		}
-	}
-	else {
-		highLevelCount[4] = 0;
-		lowLevelCount[4]++;
-		if (lowLevelCount[4] > COUNT_TIME) {
-			lowLevelCount[4] = 0;
-			printf("13600501179:0:笑气超压报警\n");
-		}
-	}
-
-	if (1 == HAL_GPIO_ReadPin(xiaoQiLow_in_GPIO_Port, xiaoQiLow_in_Pin))		//IO 是高电平 对应没有报警状态  
-	{
-		lowLevelCount[5] = 57;
-		highLevelCount[5]++;
-		if (highLevelCount[5] > 200)
-		{
-			highLevelCount[5] = 200;
-		}
-		if (highLevelCount[5] == 10) {
-
-			printf("13600501179:0:笑气欠压恢复正常\n");
-		}
-	}
-	else {
-		highLevelCount[5] = 0;
-		lowLevelCount[5]++;
-		if (lowLevelCount[5] > COUNT_TIME) {
-			lowLevelCount[5] = 0;
-			printf("13600501179:0:笑气欠压报警\n");
-		}
-	}
-
-	if (1 == HAL_GPIO_ReadPin(danQiUp_in_GPIO_Port, danQiUp_in_Pin))		//IO 是高电平 对应没有报警状态  
-	{
-		lowLevelCount[6] = 57;
-		highLevelCount[6]++;
-		if (highLevelCount[6] > 200)
-		{
-			highLevelCount[6] = 200;
-		}
-		if (highLevelCount[6] == 10) {
-
-			printf("13600501179:0:氮气超压恢复正常\n");
-		}
-	}
-	else {
-		highLevelCount[6] = 0;
-		lowLevelCount[6]++;
-		if (lowLevelCount[6] > COUNT_TIME) {
-			lowLevelCount[6] = 0;
-			printf("13600501179:0:氮气超压报警\n");
-		}
-	}
-
-	if (1 == HAL_GPIO_ReadPin(danQiLow_in_GPIO_Port, danQiLow_in_Pin))		//IO 是高电平 对应没有报警状态  
-	{
-		lowLevelCount[7] = 57;
-		highLevelCount[7]++;
-		if (highLevelCount[7] > 200)
-		{
-			highLevelCount[7] = 200;
-		}
-		if (highLevelCount[7] == 10) {
-
-			printf("13600501179:0:氮气欠压恢复正常\n");
-		}
-	}
-	else {
-		highLevelCount[7] = 0;
-		lowLevelCount[7]++;
-		if (lowLevelCount[7] > COUNT_TIME) {
-			lowLevelCount[7] = 0;
-			printf("13600501179:0:氮气欠压报警\n");
-		}
-	}
-
-	if (1 == HAL_GPIO_ReadPin(fuYaUp_in_GPIO_Port, fuYaUp_in_Pin))		//IO 是高电平 对应没有报警状态  
-	{
-		lowLevelCount[8] = 57;
-		highLevelCount[8]++;
-		if (highLevelCount[8] > 200)
-		{
-			highLevelCount[8] = 200;
-		}
-		if (highLevelCount[8] == 10) {
-
-			printf("13600501179:0:负压吸引超压恢复正常\n");
-		}
-	}
-	else {
-		highLevelCount[8] = 0;
-		lowLevelCount[8]++;
-		if (lowLevelCount[8] > COUNT_TIME) {
-			lowLevelCount[8] = 0;
-			printf("13600501179:0:负压吸引超压报警\n");
-		}
-	}
-
-	if (1 == HAL_GPIO_ReadPin(fuYaLow_in_GPIO_Port, fuYaLow_in_Pin))		//IO 是高电平 对应没有报警状态  
-	{
-		lowLevelCount[9] = 57;
-		highLevelCount[9]++;
-		if (highLevelCount[9] > 200)
-		{
-			highLevelCount[9] = 200;
-		}
-		if (highLevelCount[9] == 10) {
-
-			printf("13600501179:0:负压吸引欠压恢复正常\n");
-		}
-	}
-	else {
-		highLevelCount[9] = 0;
-		lowLevelCount[9]++;
-		if (lowLevelCount[9] > COUNT_TIME) {
-			lowLevelCount[9] = 0;
-			printf("13600501179:0:负压吸引欠压报警\n");
-		}
-	}
-
-	if (1 == HAL_GPIO_ReadPin(yaSuoUp_in_GPIO_Port, yaSuoUp_in_Pin))		//IO 是高电平 对应没有报警状态  
-	{
-		lowLevelCount[10] = 57;
-		highLevelCount[10]++;
-		if (highLevelCount[10] > 200)
-		{
-			highLevelCount[10] = 200;
-		}
-		if (highLevelCount[10] == 10) {
-
-			printf("13600501179:0:压缩空气超压恢复正常\n");
-		}
-	}
-	else {
-		highLevelCount[10] = 0;
-		lowLevelCount[10]++;
-		if (lowLevelCount[10] > COUNT_TIME) {
-			lowLevelCount[10] = 0;
-			printf("13600501179:0:压缩空气超压报警\n");
-		}
-	}
-
-	if (1 == HAL_GPIO_ReadPin(yaSuoLow_in_GPIO_Port, yaSuoLow_in_Pin))		//IO 是高电平 对应没有报警状态  
-	{
-		lowLevelCount[11] = 57;
-		highLevelCount[11]++;
-		if (highLevelCount[11] > 200)
-		{
-			highLevelCount[11] = 200;
-		}
-		if (highLevelCount[11] == 10) {
-
-			printf("13600501179:0:压缩空气欠压恢复正常\n");
-		}
-	}
-	else {
-		highLevelCount[11] = 0;
-		lowLevelCount[11]++;
-		if (lowLevelCount[11] > COUNT_TIME) {
-			lowLevelCount[11] = 0;
-			printf("13600501179:0:压缩空气欠压报警\n");
-		}
-	}
-
-	if (1 == HAL_GPIO_ReadPin(co2Up_in_GPIO_Port, co2Up_in_Pin))		//IO 是高电平 对应没有报警状态  
-	{
-		lowLevelCount[12] = 57;
-		highLevelCount[12]++;
-		if (highLevelCount[12] > 200)
-		{
-			highLevelCount[12] = 200;
-		}
-		if (highLevelCount[12] == 10) {
-
-			printf("13600501179:0:二氧化碳超压恢复正常\n");
-		}
-	}
-	else {
-		highLevelCount[12] = 0;
-		lowLevelCount[12]++;
-		if (lowLevelCount[12] > COUNT_TIME) {
-			lowLevelCount[12] = 0;
-			printf("13600501179:0:二氧化碳超压报警\n");
-		}
-	}
-
-	if (1 == HAL_GPIO_ReadPin(co2Low_in_GPIO_Port, co2Low_in_Pin))		//IO 是高电平 对应没有报警状态  
-	{
-		lowLevelCount[13] = 57;
-		highLevelCount[13]++;
-		if (highLevelCount[13] > 200)
-		{
-			highLevelCount[13] = 200;
-		}
-		if (highLevelCount[13] == 10) {
-
-			printf("13600501179:0:二氧化碳欠压恢复正常\n");
-		}
-	}
-	else {
-		highLevelCount[13] = 0;
-		lowLevelCount[13]++;
-		if (lowLevelCount[13] > COUNT_TIME) {
-			lowLevelCount[13] = 0;
-			printf("13600501179:0:二氧化碳欠压报警\n");
-		}
-	}
-
-}
-
-
 //按键扫描函数
 void keyScan() {
 
@@ -721,7 +400,7 @@ void keyScan() {
 			highLevelCount[0] = 200;
 		}
 		highLevelCount[0]++;
-		if (highLevelCount[0] > COUNT_TIME) {
+		if (highLevelCount[0] > countTime) {
 			gasStatus[0] = 0;
 		}
 	}
@@ -732,7 +411,7 @@ void keyScan() {
 			lowLevelCount[0] = 200;
 		}
 		lowLevelCount[0]++;
-		if (lowLevelCount[0] > COUNT_TIME) {
+		if (lowLevelCount[0] > countTime) {
 			gasStatus[0] = 1;
 		}
 	}
@@ -746,7 +425,7 @@ void keyScan() {
 			highLevelCount[1] = 200;
 		}
 		highLevelCount[1]++;
-		if (highLevelCount[1] > COUNT_TIME) {
+		if (highLevelCount[1] > countTime) {
 			gasStatus[1] = 0;
 		}
 	}
@@ -757,7 +436,7 @@ void keyScan() {
 			lowLevelCount[1] = 200;
 		}
 		lowLevelCount[1]++;
-		if (lowLevelCount[1] > COUNT_TIME) {
+		if (lowLevelCount[1] > countTime) {
 			gasStatus[1] = 1;
 		}
 	}
@@ -771,7 +450,7 @@ void keyScan() {
 			highLevelCount[2] = 200;
 		}
 		highLevelCount[2]++;
-		if (highLevelCount[2] > COUNT_TIME) {
+		if (highLevelCount[2] > countTime) {
 			gasStatus[2] = 0;
 		}
 	}
@@ -782,7 +461,7 @@ void keyScan() {
 			lowLevelCount[2] = 200;
 		}
 		lowLevelCount[2]++;
-		if (lowLevelCount[2] > COUNT_TIME) {
+		if (lowLevelCount[2] > countTime) {
 			gasStatus[2] = 1;
 		}
 	}
@@ -796,7 +475,7 @@ void keyScan() {
 			highLevelCount[3] = 200;
 		}
 		highLevelCount[3]++;
-		if (highLevelCount[3] > COUNT_TIME) {
+		if (highLevelCount[3] > countTime) {
 			gasStatus[3] = 0;
 		}
 	}
@@ -807,7 +486,7 @@ void keyScan() {
 			lowLevelCount[3] = 200;
 		}
 		lowLevelCount[3]++;
-		if (lowLevelCount[3] > COUNT_TIME) {
+		if (lowLevelCount[3] > countTime) {
 			gasStatus[3] = 1;
 		}
 	}
@@ -821,7 +500,7 @@ void keyScan() {
 			highLevelCount[4] = 200;
 		}
 		highLevelCount[4]++;
-		if (highLevelCount[4] > COUNT_TIME) {
+		if (highLevelCount[4] > countTime) {
 			gasStatus[4] = 0;
 		}
 	}
@@ -832,7 +511,7 @@ void keyScan() {
 			lowLevelCount[4] = 200;
 		}
 		lowLevelCount[4]++;
-		if (lowLevelCount[4] > COUNT_TIME) {
+		if (lowLevelCount[4] > countTime) {
 			gasStatus[4] = 1;
 		}
 	}
@@ -846,7 +525,7 @@ void keyScan() {
 			highLevelCount[5] = 200;
 		}
 		highLevelCount[5]++;
-		if (highLevelCount[5] > COUNT_TIME) {
+		if (highLevelCount[5] > countTime) {
 			gasStatus[5] = 0;
 		}
 	}
@@ -857,7 +536,7 @@ void keyScan() {
 			lowLevelCount[5] = 200;
 		}
 		lowLevelCount[5]++;
-		if (lowLevelCount[5] > COUNT_TIME) {
+		if (lowLevelCount[5] > countTime) {
 			gasStatus[5] = 1;
 		}
 	}
@@ -871,7 +550,7 @@ void keyScan() {
 			highLevelCount[6] = 200;
 		}
 		highLevelCount[6]++;
-		if (highLevelCount[6] > COUNT_TIME) {
+		if (highLevelCount[6] > countTime) {
 			gasStatus[6] = 0;
 		}
 	}
@@ -882,7 +561,7 @@ void keyScan() {
 			lowLevelCount[6] = 200;
 		}
 		lowLevelCount[6]++;
-		if (lowLevelCount[6] > COUNT_TIME) {
+		if (lowLevelCount[6] > countTime) {
 			gasStatus[6] = 1;
 		}
 	}
@@ -896,7 +575,7 @@ void keyScan() {
 			highLevelCount[7] = 200;
 		}
 		highLevelCount[7]++;
-		if (highLevelCount[7] > COUNT_TIME) {
+		if (highLevelCount[7] > countTime) {
 			gasStatus[7] = 0;
 		}
 	}
@@ -907,7 +586,7 @@ void keyScan() {
 			lowLevelCount[7] = 200;
 		}
 		lowLevelCount[7]++;
-		if (lowLevelCount[7] > COUNT_TIME) {
+		if (lowLevelCount[7] > countTime) {
 			gasStatus[7] = 1;
 		}
 	}
@@ -921,7 +600,7 @@ void keyScan() {
 			highLevelCount[8] = 200;
 		}
 		highLevelCount[8]++;
-		if (highLevelCount[8] > COUNT_TIME) {
+		if (highLevelCount[8] > countTime) {
 			gasStatus[8] = 0;
 		}
 	}
@@ -932,7 +611,7 @@ void keyScan() {
 			lowLevelCount[8] = 200;
 		}
 		lowLevelCount[8]++;
-		if (lowLevelCount[8] > COUNT_TIME) {
+		if (lowLevelCount[8] > countTime) {
 			gasStatus[8] = 1;
 		}
 	}
@@ -946,7 +625,7 @@ void keyScan() {
 			highLevelCount[9] = 200;
 		}
 		highLevelCount[9]++;
-		if (highLevelCount[9] > COUNT_TIME) {
+		if (highLevelCount[9] > countTime) {
 			gasStatus[9] = 0;
 		}
 	}
@@ -957,7 +636,7 @@ void keyScan() {
 			lowLevelCount[9] = 200;
 		}
 		lowLevelCount[9]++;
-		if (lowLevelCount[9] > COUNT_TIME) {
+		if (lowLevelCount[9] > countTime) {
 			gasStatus[9] = 1;
 		}
 	}
@@ -971,7 +650,7 @@ void keyScan() {
 			highLevelCount[10] = 200;
 		}
 		highLevelCount[10]++;
-		if (highLevelCount[10] > COUNT_TIME) {
+		if (highLevelCount[10] > countTime) {
 			gasStatus[10] = 0;
 		}
 	}
@@ -982,7 +661,7 @@ void keyScan() {
 			lowLevelCount[10] = 200;
 		}
 		lowLevelCount[10]++;
-		if (lowLevelCount[10] > COUNT_TIME) {
+		if (lowLevelCount[10] > countTime) {
 			gasStatus[10] = 1;
 		}
 	}
@@ -996,7 +675,7 @@ void keyScan() {
 			highLevelCount[11] = 200;
 		}
 		highLevelCount[11]++;
-		if (highLevelCount[11] > COUNT_TIME) {
+		if (highLevelCount[11] > countTime) {
 			gasStatus[11] = 0;
 		}
 	}
@@ -1007,7 +686,7 @@ void keyScan() {
 			lowLevelCount[11] = 200;
 		}
 		lowLevelCount[11]++;
-		if (lowLevelCount[11] > COUNT_TIME) {
+		if (lowLevelCount[11] > countTime) {
 			gasStatus[11] = 1;
 		}
 	}
@@ -1021,7 +700,7 @@ void keyScan() {
 			highLevelCount[12] = 200;
 		}
 		highLevelCount[12]++;
-		if (highLevelCount[12] > COUNT_TIME) {
+		if (highLevelCount[12] > countTime) {
 			gasStatus[12] = 0;
 		}
 	}
@@ -1032,7 +711,7 @@ void keyScan() {
 			lowLevelCount[12] = 200;
 		}
 		lowLevelCount[12]++;
-		if (lowLevelCount[12] > COUNT_TIME) {
+		if (lowLevelCount[12] > countTime) {
 			gasStatus[12] = 1;
 		}
 	}
@@ -1046,7 +725,7 @@ void keyScan() {
 			highLevelCount[13] = 200;
 		}
 		highLevelCount[13]++;
-		if (highLevelCount[13] > COUNT_TIME) {
+		if (highLevelCount[13] > countTime) {
 			gasStatus[13] = 0;
 		}
 	}
@@ -1057,7 +736,7 @@ void keyScan() {
 			lowLevelCount[13] = 200;
 		}
 		lowLevelCount[13]++;
-		if (lowLevelCount[13] > COUNT_TIME) {
+		if (lowLevelCount[13] > countTime) {
 			gasStatus[13] = 1;
 		}
 	}
@@ -1083,7 +762,6 @@ void gasAlarm() {
 
 			BEEP_ON;
 		}
-
 	}
 	else {
 		HAL_GPIO_WritePin(yangQiNormal_out_GPIO_Port, yangQiNormal_out_Pin, GPIO_PIN_SET);
